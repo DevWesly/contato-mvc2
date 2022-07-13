@@ -5,7 +5,7 @@ const uid = 1;
 module.exports = {
     listarContatos: (req,res)=>{
         let contatos = require(`../database/contatos_${uid}.json`);
-        res.send(contatos);
+        res.render('home.ejs',{contatos:contatos});
     },
     capturarContato: (req,res)=>{
         let contatos = require(`../database/contatos_${uid}.json`);
