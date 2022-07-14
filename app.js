@@ -7,6 +7,13 @@ const app = express();
 
 app.set('view engine','ejs');
 
+//config a pasta public
+
+app.use(express.static('public'));
+
+
+
+
 app.get('/',(req,res)=>{
     res.send("Olá")
 });
