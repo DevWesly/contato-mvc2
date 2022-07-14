@@ -10,17 +10,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/geral.css">
-    <link rel="stylesheet" href="css/registro.css">
 
-    <!-- fonte: https://github.com/sergiomoura/contatos-html-template/blob/main/css/geral.css -->
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            box-shadow: 0 0 2px inset rgba(256, 256, 256, 0.3);
+            width: 400px;
+        }
 
+        form input {
+            display: block;
+            width: 100%;
+        }
 
+        form .controles {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            margin-bottom: 0;
+        }
+    </style>
+    
     <title>Contatos</title>
 </head>
 
 <body>
 
-
+    
     <form action="/usuarios" method="post">
         <label>
             Nome:
