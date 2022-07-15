@@ -1,4 +1,13 @@
+const fs = require('fs');
+
+
+
 module.exports = (req,res,next)=>{
-    console.log("passei pelo marca entrada");
+    let dataHora = (new Date()).toISOString();
+
+    fs.writeFileSync('horaAcessada.txt', (dataHora+ "\n"),{flag:'a+'});
+
     next();
-};
+
+
+};  
