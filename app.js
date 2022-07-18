@@ -1,5 +1,7 @@
 const express = require('express');
 
+const session = require('express-session');
+
 const ContatosRouter = require('./routes/ContatosRouter');
 const UsuariosRouter = require('./routes/UsuariosRouter');
 
@@ -13,6 +15,13 @@ app.set('view engine', 'ejs');
 //config a pasta public
 
 app.use(express.static('public'));
+
+//configurando o uso do session
+app.use(session({
+    secret:"segredo",
+    resave: false,
+    saveUninitialized:false
+}));
 
 //aplicando middleware 
 app.use(marcaEntradaDeRequisicao);
