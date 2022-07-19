@@ -12,6 +12,10 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+
+//configura req.body para conter informaçoes digitadas pelo usuario no formulario
+app.use(express.urlencoded({extended:false}));
+
 //config a pasta public
 
 app.use(express.static('public'));

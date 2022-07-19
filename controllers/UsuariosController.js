@@ -10,12 +10,50 @@ module.exports = {
     showRegistrar: (req, res) => {
         res.render('registro.ejs');
     },
+
+    store: (req, res) => {
+        //capturar as informações digitadas pelo infeliz
+
+        let {
+            nome,
+            email,
+            senha
+        } = req.body;
+
+        //importar o array de usuarios--
+
+        let usuarios = require('../database/usuarios.json');
+
+        //determinar o novo id do novo usuarios
+
+        let idNovo = usuarios[usuarios.length-1].id + 1;
+        //criar a senha criptografada;
+
+        let senhaCrip = bcrypt.hashSync(senha,10);
+
+        //criar um objeto com os dados do usuario
+        let usuario = {
+            id:idNovo,
+            nome:nome,
+            email:email,
+            senha:senhaCrip
+        };
+
+        //adicionar o novo usuario a esse array--
+            usuarios.push(usuario);
+
+        //Salvar esse array no arquivo usuarios.jsoon
+        fs.writeFileSync(path.join(__dirname,'/../database/usuarios.json'), JSON.stringify(usuarios,null,4));
+
+        //direcionando novo usuario      
+        res.redirect('/contatos');
+    },
     mostrarLogin: (req, res) => {
         res.render('login.ejs');
     },
     login: (req, res) => {
 
-        //etrair o login e a senha digitadas pelo usuario;
+        //extrair o login e a senha digitadas pelo usuario;
         let {
             email,
             senha
@@ -29,18 +67,14 @@ module.exports = {
 
         //verificar se o emais exite e se asenha deste email confere;
         usuarios.find(
+            u => {
+                if (u.email == email && bcrypt.compareSync(senha, u.senha)) {
+                    return true;
 
-            u =>u.email == email && bcrypt.compareSync(senha,u.senha);
-
-            //que é igual a....
-            // u => {
-            //     if(u.email == email && bcrypt.compareSync(senha,u.senha)){
-            //         return true;
-
-            //     } else {
-            //         return false;
-            //     }
-            // }
+                } else {
+                    return false;
+                }
+            }
         )
 
         //se o usuario na for encontrado ou a senha for invalida, mandar erro
